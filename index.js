@@ -1,10 +1,16 @@
-var express = require('express')
-var app = express()
+const express = require('express')
+const app = express()
+const fs = require('fs')
 
-app.get('/', function (req, res){
-    res.send('testik')
-}) 
-
-app.listen(8000, function(){
-    console.log('e')
+app.get('/', (req,res) => {
+   fs.readFile('test.txt', function(err,data) {
+        if (err) { 
+            console.error(err);
+            return;
+        } 
+        var list = data.toString().split("\n").join("<br />");
+        res.send(list);
+    })
 })
+
+app.listen(8000)
