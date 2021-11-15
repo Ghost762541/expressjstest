@@ -1,16 +1,17 @@
 const express = require('express')
 const app = express()
-const fs = require('fs')
+
+// загрузка файла через  require
+const fileData = require('./test.json')
+// настройка параметров шаблонизатора
+app.set('view engine', 'pug');
 
 app.get('/', (req,res) => {
-   fs.readFile('test.txt', function(err,data) {
-        if (err) { 
-            console.error(err);
-            return;
-        } 
-        var list = data.toString().split("\n").join("<br />");
-        res.send(list);
-    })
+    // рендер просит на вход первым параметром название шаблон-страницы без расширения
+    // вторым объект данных
+   res.render('index',{
+       product: fileData
+   })
 })
 
 app.listen(8000)
