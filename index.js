@@ -10,14 +10,10 @@ const Account = mongoose.model('Account', schema);
 
 
 mongoose.connect('mongodb://192.168.241.84:27017/test');
-
+app.use(express.urlencoded({ extended: true }))
 
 //настройка параметров шаблонизатора
 app.set('view engine', 'pug');
-
-// button.onclick = function() {
-//     alert('Клик!');
-//   };
 
 app.get('/', async (req,res) => {
     const first = new Account({title: "first", accountId: 1});
@@ -32,15 +28,37 @@ app.get('/', async (req,res) => {
 })
 
 app.get('/new', async (req, res) => {
-    const first = new Account({title: "first", accountId: 1});
+    // const first = new Account({title: "first", accountId: 1});
+    // await first.save();
+    //const accounts = await Account.find()
+    res.render('form')
+    //res.redirect('/');
+
+})
+
+app.post('/new', async (req, res) => {
+    console.log(req.body.title);
+    // Account.count({}, function(err, result) {
+    //     if (err) {
+    //       console.log(err);
+    //     } else {
+    //         const first = new Account({title: req.body.title, accountId: result + 1});;
+    //     }
+    //   });
+    Account.count({}, function( err, count){
+        console.log( count );
+    })
+    let c = await Account.count({});
+    console.log('count', c);
+    const first = new Account({title: req.body.title, accountId: c});
     await first.save();
-    const accounts = await Account.find()
-    res.redirect('back');
+    res.redirect('/');
+    //res.send("ok");
 })
 
 app.get('/delete/:_id', async (req, res) => {
     Account.find({_id: req.params._id}).remove().exec();
-    res.redirect('back');
+    res.redirect('/');
 })
 
 app.listen(3000)
