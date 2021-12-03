@@ -18,5 +18,6 @@ html
     //-p= accounts
     each account in accounts 
       p= account.title
-      a(href="/delete/:id") Del
-      p= account.accontId
+      p= account.accountId
+      p= account._id
+      a(href="/delete/" + account._id) Del

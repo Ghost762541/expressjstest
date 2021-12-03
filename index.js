@@ -24,7 +24,7 @@ app.get('/', async (req,res) => {
     //await first.save();
     
     const accounts = await Account.find()
-    //console.log(accounts)
+    console.log(accounts)
     res.render('index', {
         Account: first,
         accounts,
@@ -38,8 +38,8 @@ app.get('/new', async (req, res) => {
     res.redirect('back');
 })
 
-app.get('/delete/:id', async (req, res) => {
-    Account.find({id: req.params.id}).remove().exec();
+app.get('/delete/:_id', async (req, res) => {
+    Account.find({_id: req.params._id}).remove().exec();
     res.redirect('back');
 })
 
