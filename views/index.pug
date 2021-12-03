@@ -1,8 +1,22 @@
 html
   head
-    title="Страница"
+    title="Аккаунты"
   body
-    each val in product 
-      p=val.title 
-      p=val.description
-      p=val.price 
+    a(href="/new") Add
+    //-button(type='button' class=' c-btn-blue c-btn-circle c-btn-uppercase' value="Read More" onclick='gotomain()') Add
+    //- button#BubbleButton.button.hypeButton.button-3d.button-caution.button-circle.button-jumbo(onclick = 'onButtonClick()') Add
+    //- script.
+    //-   function gotomain (){
+    //-     $.ajax({
+    //-     "url": "/new",
+    //-     "method": "POST"
+    //-     }); 
+    //-   }
+    p= Account.title
+    p= Account.accountId
+
+    //-p= accounts
+    each account in accounts 
+      p= account.title
+      a(href="/delete/:id") Del
+      p= account.accontId
