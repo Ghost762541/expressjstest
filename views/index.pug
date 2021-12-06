@@ -9,7 +9,7 @@ html
     div.container.list-group.mx-3
       each account in accounts 
         div.row
-          p.list-group-item.col-10= account.title
+          p.list-group-item.col-10.my-2= account.title
           a.btn.btn-danger.col-1.mx-5.my-2(href="/delete/" + account._id) Delete
           //-p.list-group-item.col-10= account.accountId
           //-p.list-group-item.col-10= account._id
