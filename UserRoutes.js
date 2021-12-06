@@ -12,13 +12,13 @@ UserRoute.use(function timeLog(req, res, next) {
 UserRoute.get('/', async (req, res) => {
     const users = await User.find()
     console.log(users)
-    res.render('users', {
+    res.render('users/users', {
         users,
    })
   });
 
 UserRoute.get('/new', (req, res) => {
-    res.render('newUser')
+    res.render('users/new')
   });
 
 UserRoute.post('/new', (req, res) => {

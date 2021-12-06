@@ -1,5 +1,7 @@
-extends header.pug
-a.btn.btn-success.col-1.my-3(href="/accounts/new") Add
+extends ../header.pug
+
+block content
+  a.btn.btn-success.col-1.my-3(href="/accounts/new") Add
   div.container.list-group.mx-3
     each account in accounts 
       div.row

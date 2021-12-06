@@ -1,0 +1,11 @@
+extends ../header.pug
+
+block content
+
+  a.btn.btn-success.col-1.my-3(href="/users/new") Add
+  div.container.list-group.mx-3
+    each user in users 
+      div.row
+        p.list-group-item.col-10.my-2= user.titleUser
+        p.list-group-item.col-10.my-2=user.accountId
+        a.btn.btn-danger.col-1.mx-5.my-2(href="users/delete/" + user._id) Delete

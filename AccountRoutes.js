@@ -12,13 +12,13 @@ AccountRoute.use(function timeLog(req, res, next) {
   AccountRoute.get('/', async (req, res) => {
     const accounts = await Account.find()
     // console.log(accounts)
-    res.render('accounts', {
+    res.render('accounts/accounts', {
         accounts,
    })
   });
 
   AccountRoute.get('/new', (req, res) => {
-    res.render('newAccount')
+    res.render('accounts/new')
   });
 
   AccountRoute.post('/new', (req, res) => {
