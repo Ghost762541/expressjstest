@@ -1,9 +1,8 @@
 const express = require('express')
 const UserRoute = express.Router();
 const mongoose = require('mongoose')
+const { User, Account } = require('./model.js');
 
-const Userschema = new mongoose.Schema({titleUser: 'string', accountId: 'string', userId: 'string' });
-const User = mongoose.model('User', Userschema);
 
 UserRoute.use(function timeLog(req, res, next) {
     next();
@@ -21,14 +20,11 @@ UserRoute.get('/new', (req, res) => {
     res.render('users/new')
   });
 
-UserRoute.post('/new', (req, res) => {
-    User.count({}, function( err, count){
-        console.log( count );
-    })
-    let c = User.count({});
-    console.log('count', c);
+UserRoute.post('/new', async (req, res) => {
+    let c = await User.count({}) + 1;
+    // console.log('count', c);
     const newuser = new User({titleUser: req.body.titleUser, accountId: req.body.Id, userId: c});
-    newuser.save();
+    await newuser.save();
     res.redirect('/users');
   })
 
