@@ -1,0 +1,7 @@
+extends ../header.pug
+
+block content
+  form.d-flex.justify-content-center(action="/accounts/" + accountId + "/new" method="POST") 
+    div.row
+      input.form-control.mt-3(type="text" name="titleUser")
+      button.btn.btn-primary.mt-3 submit

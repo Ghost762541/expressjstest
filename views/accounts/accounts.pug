@@ -5,7 +5,6 @@ block content
   div.container.list-group.mx-3
     each account in accounts 
       div.row
-        //- a.list-group-item.col-10.my-2(href="/accounts/" + account.accountId + "/users")= account.titleAccount
         a.list-group-item.col-10.my-2(href="/accounts/" + account.accountId + "/users")= account.titleAccount
         a.btn.btn-danger.col-1.mx-5.my-2(href="/accounts/delete/" + account._id) Delete
       
