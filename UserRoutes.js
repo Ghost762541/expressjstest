@@ -1,6 +1,8 @@
 const express = require('express')
 const UserRoute = express.Router();
 const mongoose = require('mongoose')
+const moment = require('moment');
+
 const { User, Account } = require('./model.js');
 
 
@@ -22,8 +24,9 @@ UserRoute.get('/new', (req, res) => {
 
 UserRoute.post('/new', async (req, res) => {
     let c = await User.count({}) + 1;
-    // console.log('count', c);
-    const newuser = new User({titleUser: req.body.titleUser, accountId: req.body.Id, userId: c});
+    let date_created = moment();
+    console.log('date ', date_created);
+    const newuser = new User({titleUser: req.body.titleUser, accountId: req.body.Id, userId: c, date_created: date_created.format('YYYY-MM-DD hh:mm:ss')});
     await newuser.save();
     res.redirect('/users');
   })

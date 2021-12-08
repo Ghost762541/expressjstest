@@ -1,11 +1,12 @@
 extends ../header.pug
 
 block content
-
+  p.h5.text-center.my-2=account.titleAccount
   a.btn.btn-success.col-1.my-3(href="/accounts/" + accountId + "/new") Add
   div.container.list-group.mx-3
     each user in users 
       div.row
         p.list-group-item.col-10.my-2= user.titleUser
         p.list-group-item.col-10.my-2=user.accountId
+        p.list-group-item.col-10.my-2= user.date_created
         a.btn.btn-danger.col-1.mx-5.my-2(href="/accounts/" + accountId + "/delete/" + user._id) Delete

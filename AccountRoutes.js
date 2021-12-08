@@ -34,11 +34,15 @@ AccountRoute.get('/delete/:_id', async (req, res) => {
 
 AccountRoute.get('/:id/users', async (req, res) => {
   let accountId = req.params.id;
+  //const newAccount = new Account({titleAccount: req.body.titleAccount, accountId: c});
+  let account = await Account.findOne({ accountId: req.params.id });
+  //let account_name = account[0].titleAccount;
   const users = await User.find({ accountId: req.params.id });
   console.log(users);
   res.render('accounts/users_list', {
     users,
-    accountId
+    accountId,
+    account
   })
 });
 
@@ -52,8 +56,18 @@ AccountRoute.get('/:id/new', async (req, res) => {
 AccountRoute.post('/:accountId/new', async (req, res) => {
   let userId = await User.count({}) + 1;
   let accountId = req.params.accountId;
-  console.log('create new user:', {accountId, userId});
-  const newUser = new User({titleUser: req.body.titleUser, accountId, userId});
+  Date.prototype.yyyymmdd = function() {
+    var mm = this.getMonth() + 1; // getMonth() is zero-based
+    var dd = this.getDate();
+  
+    return [this.getFullYear(),
+            (mm>9 ? '' : '0') + mm,
+            (dd>9 ? '' : '0') + dd
+           ].join('');
+  };
+  let date_created = new Date();
+  console.log('create new user:', {accountId, userId, date_created: date_created.yyyymmdd});
+  const newUser = new User({titleUser: req.body.titleUser, accountId, userId, date_created});
   await newUser.save();
   //res.json({})
   res.redirect('/accounts/' + accountId + '/users');

@@ -8,4 +8,5 @@ block content
       div.row
         p.list-group-item.col-10.my-2= user.titleUser
         p.list-group-item.col-10.my-2=user.accountId
+        p.list-group-item.col-10.my-2= user.date_created
         a.btn.btn-danger.col-1.mx-5.my-2(href="users/delete/" + user._id) Delete
