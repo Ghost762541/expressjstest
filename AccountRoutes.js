@@ -59,8 +59,9 @@ AccountRoute.post('/:accountId/new', async (req, res) => {
   res.redirect('/accounts/' + accountId + '/users');
 })
 
-AccountRoute.get(':accountId/delete/:_id', async (req, res) => {
-  User.find({_id: req.params._id}).remove().exec();
+AccountRoute.get('/:accountId/delete/:_id', async (req, res) => {
+  let accountId = req.params.accountId;
+  await User.find({_id: req.params._id}).remove().exec();
   res.redirect('/accounts/' + accountId + '/users');
 })
 
