@@ -11,9 +11,14 @@ AccountRoute.get('/', async (req, res) => {
   const accounts = await Account.find();
   console.log(accounts)
   res.render('accounts/accounts', {
-    accounts,
+    accounts
   })
 });
+
+// AccountRoute.get('/', async (req, res) => {
+//   const accounts = await Account.find();
+//   res.json(accounts);
+// })
 
 AccountRoute.get('/new', (req, res) => {
   res.render('accounts/new');
@@ -56,17 +61,8 @@ AccountRoute.get('/:id/new', async (req, res) => {
 AccountRoute.post('/:accountId/new', async (req, res) => {
   let userId = await User.count({}) + 1;
   let accountId = req.params.accountId;
-  Date.prototype.yyyymmdd = function() {
-    var mm = this.getMonth() + 1; // getMonth() is zero-based
-    var dd = this.getDate();
-  
-    return [this.getFullYear(),
-            (mm>9 ? '' : '0') + mm,
-            (dd>9 ? '' : '0') + dd
-           ].join('');
-  };
   let date_created = new Date();
-  console.log('create new user:', {accountId, userId, date_created: date_created.yyyymmdd});
+  console.log('create new user:', {accountId, userId, date_created: date_created});
   const newUser = new User({titleUser: req.body.titleUser, accountId, userId, date_created});
   await newUser.save();
   //res.json({})

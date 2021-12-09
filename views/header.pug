@@ -2,6 +2,41 @@ html
   head
     title="Новый"
     link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous")
+    //- link(rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons")
+    link(rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css")
+    script(src="https://code.jquery.com/jquery-1.12.4.js")
+    //- script(src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js")
+    //- script(src="https://cdn.datatables.net/plug-ins/1.10.15/i18n/Russian.json")
+    script.
+      $(document).ready(function() {
+        $('#example').DataTable( {
+          //- "processing": true,
+          "serverSide": 0,
+          "ajax": "http://localhost:3000/users/a",
+          //- "columns.defaultcontent": "",
+          //- "aoColumns": "mData",
+          aoColumns: [
+            { mData: 'titleUser' },
+            { mData: 'accountId' },
+            { mData: 'userId' },
+            { mData: 'date_created' },
+          ],
+          //- "сdataSrc": ""
+          //- columnDefs: [{
+          //-   "defaultContent": "-",
+          //-   "targets": "_all"
+          //- }]
+        });
+      });
+    //- script.
+    //-   $(document).ready(function() {
+    //-   $('#test').DataTable( {
+    //-     "processing": true,
+    //-     "serverSide": true,
+    //-     "ajax": "https://datatables.net/examples/server_side/scripts/server_processing.php"
+    //-   } );
+    //-   } );
+    //- script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js")
   body.container
     block head 
       nav.navbar.navbar-expand-lg.navbar-light.bg-light.text-center.mx-auto.navbar-brand="header"

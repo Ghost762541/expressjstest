@@ -2,6 +2,8 @@ const express = require('express')
 const UserRoute = express.Router();
 const mongoose = require('mongoose')
 const moment = require('moment');
+//const jquery = require('jquery');
+//const DatDataTable = require('DataTable.net')
 
 const { User, Account } = require('./model.js');
 
@@ -11,16 +13,21 @@ UserRoute.use(function timeLog(req, res, next) {
   });
 
 UserRoute.get('/', async (req, res) => {
-    const users = await User.find()
+    const users = await User.find();
     console.log(users);
-    res.render('users/users', {
-        users,
-   })
-  });
+    res.render('users/users');
+});
+
+UserRoute.get('/a', async (req, res) => {
+  const users = await User.find();
+  console.log(users);
+  res.json({
+    data: users});
+});
 
 UserRoute.get('/new', (req, res) => {
     res.render('users/new')
-  });
+});
 
 UserRoute.post('/new', async (req, res) => {
     let c = await User.count({}) + 1;
@@ -29,7 +36,7 @@ UserRoute.post('/new', async (req, res) => {
     const newuser = new User({titleUser: req.body.titleUser, accountId: req.body.Id, userId: c, date_created: date_created.format('YYYY-MM-DD hh:mm:ss')});
     await newuser.save();
     res.redirect('/users');
-  })
+})
 
 UserRoute.get('/delete/:_id', async (req, res) => {
     User.find({_id: req.params._id}).remove().exec();
