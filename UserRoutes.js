@@ -2,11 +2,11 @@ const express = require('express')
 const UserRoute = express.Router();
 const mongoose = require('mongoose')
 const moment = require('moment');
+//const Chart = requaire('chart.js/auto');
 //const jquery = require('jquery');
 //const DatDataTable = require('DataTable.net')
 
 const { User, Account } = require('./model.js');
-
 
 UserRoute.use(function timeLog(req, res, next) {
     next();
@@ -15,14 +15,14 @@ UserRoute.use(function timeLog(req, res, next) {
 UserRoute.get('/', async (req, res) => {
     const users = await User.find();
     console.log(users);
-    res.render('users/users');
+    res.render('users/users', {
+    });
 });
 
 UserRoute.get('/a', async (req, res) => {
   const users = await User.find();
   console.log(users);
-  res.json({
-    data: users});
+  res.json({data: users});
 });
 
 UserRoute.get('/new', (req, res) => {

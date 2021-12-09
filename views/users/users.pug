@@ -7,33 +7,42 @@ block content
   table(id="example" class="display" width="100%")
     thead
       tr 
-        th Name 
-        th Account Id 
-        th User Id
-        th Date created 
-    tfoot
-      tr
-        th Name 
-        th Account Id 
-        th User Id
-        th Date created 
-  //- table(id="test" class="display" style="width:100%")
-  //-   thead
-  //-     tr
-  //-       th Name
-  //-       th Position
-  //-       th Office
-  //-       th Age
-  //-       th Start date
-  //-       th Salary
+        th.text-center Name 
+        th.text-center Account Id 
+        th.text-center User Id
+        th.text-center Date created 
+        th.text-center Actions
 
-  //- div.container.list-group.mx-3
-  //-   each user in users 
-  //-     div.row
-  //-       p.list-group-item.col-10.my-2= user.titleUser
-  //-       p.list-group-item.col-10.my-2=user.accountId
-  //-       p.list-group-item.col-10.my-2= user.date_created
-  //-       a.btn.btn-danger.col-1.mx-5.my-2(href="users/delete/" + user._id) Delete
+  canvas(id="myChart" width="400" height="200")
+
+  script(src="https://cdn.jsdelivr.net/npm/chart.js")
+  script.
+    var ctx = document.getElementById('myChart'); // node
+    var ctx = document.getElementById('myChart').getContext('2d'); // 2d context
+    var ctx = $('#myChart'); // jQuery instance
+    var ctx = 'myChart'; // element id
+
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ["00",  "01", "02", "03", "04", "05",  "06", "07", "08", "09", "10",  "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"],
+        datasets: [
+          {
+            label: "users",
+            backgroundColor: "#c45850",
+            data: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+          }
+        ]
+      },
+      options: {
+        legend: { display: false },
+        title: {
+          display: true,
+          text: 'Predicted world population (millions) in 2050'
+        }
+      }
+    });
+
   script(src="https://code.jquery.com/jquery-1.12.4.js")
   script(type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js")
   script(src="https://cdn.datatables.net/plug-ins/1.10.15/api/row().show().js")
