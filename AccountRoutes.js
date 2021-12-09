@@ -64,7 +64,7 @@ AccountRoute.post('/:accountId/new', async (req, res) => {
   let accountId = req.params.accountId;
   let date_created = moment();
   console.log('create new user:', {accountId, userId, date_created: date_created.format('YYYY-MM-DD hh:mm:ss')});
-  const newUser = new User({titleUser: req.body.titleUser, accountId, userId, date_created: date_created.format('YYYY-MM-DD hh:mm:ss')});
+  const newUser = new User({titleUser: req.body.titleUser, accountId, userId, date_created: date_created.format('YYYY-MM-DD HH:mm:ss')});
   await newUser.save();
   //res.json({})
   res.redirect('/accounts/' + accountId + '/users');

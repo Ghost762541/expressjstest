@@ -14,16 +14,20 @@ UserRoute.use(function timeLog(req, res, next) {
 
 UserRoute.get('/', async (req, res) => {
     const users = await User.find();
-    console.log(users);
-    res.render('users/users', {
-    });
+    //console.log(users);
+    res.render('users/users');
 });
 
 UserRoute.get('/a', async (req, res) => {
   const users = await User.find();
-  console.log(users);
+  //console.log(users);
   res.json({data: users});
 });
+
+UserRoute.get('/chart', (req, res) => {
+    let data_chart = [0, 2, 3, 4]
+    res.json(data_chart);
+  });
 
 UserRoute.get('/new', (req, res) => {
     res.render('users/new')
@@ -32,8 +36,8 @@ UserRoute.get('/new', (req, res) => {
 UserRoute.post('/new', async (req, res) => {
     let c = await User.count({}) + 1;
     let date_created = moment();
-    console.log('date ', date_created);
-    const newuser = new User({titleUser: req.body.titleUser, accountId: req.body.Id, userId: c, date_created: date_created.format('YYYY-MM-DD hh:mm:ss')});
+    //console.log('date ', date_created);
+    const newuser = new User({titleUser: req.body.titleUser, accountId: req.body.Id, userId: c, date_created: date_created.format('YYYY-MM-DD HH:mm:ss')});
     await newuser.save();
     res.redirect('/users');
 })
