@@ -13,6 +13,17 @@ block content
         th.text-center Date created 
         th.text-center Actions
 
+  
+  
+  div.row
+    div.col-md-12
+      div.form-group
+        div.input-group.date(id="datepicker")
+          input.datapicker(data-provide="datepicker" data-date-format="yyyy-mm-dd")
+          //- input.form-control(type="text")
+          span.input-group-addon
+            span.glyphicon-calendar.glyphicon
+
   canvas(id="myChart" width="400" height="200")
 
   script(src="https://cdn.jsdelivr.net/npm/chart.js")
@@ -21,7 +32,6 @@ block content
     var ctx = document.getElementById('myChart').getContext('2d'); // 2d context
     var ctx = $('#myChart'); // jQuery instance
     var ctx = 'myChart'; // element id
-    //let data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
     
     fetch('http://localhost:3000/users/chart', {
       headers : { 
@@ -30,10 +40,8 @@ block content
       }
     })
       .then(response => response.json())
-      //.then(arr => data.push(arr));
       .then(arr => {
         let data = [];
-        //data=concat.arr;
         var myChart = new Chart(ctx, {
           type: 'bar',
           data: {
@@ -54,8 +62,6 @@ block content
           }
         }
     });});
-    //console.log(data);
-    
 
   script(src="https://code.jquery.com/jquery-1.12.4.js")
   script(type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js")

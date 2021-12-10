@@ -28,13 +28,10 @@ UserRoute.get('/chart', async (req, res) => {
     let data_chart = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     let current_date = '2021-12-09';
     let current_date_time = '2021-12-09 01:59:45';
-    let h = [];
     let users = await User.find( { date_created : { $regex : current_date } } )
     for (let i=0; i < users.length; i++) {
       data_chart[Number(users[i].date_created.slice(11, 13))] ++;
     }
-    console.log(data_chart);
-    console.log(h);
     res.json(data_chart);
   });
 
