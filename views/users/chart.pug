@@ -1,0 +1,58 @@
+extends ../header.pug
+
+block content
+    //- form( action="/users/chartjson"  method="GET" onsubmit="show_chart()")
+    input.datapicker(data-provide="datepicker-inline" data-date-format="yyyy-mm-dd" name="date" id="date")
+    button(onclick="show_chart()") Show
+    //- div.row.my-3
+    //- div.col-md-12
+    //-   form.d-flex.justify-content-center(action="/users/chart" method="POST") 
+    //-     div.form-group
+    //-       div.input-group.date(id="datepicker")
+    //-         div.datapicker.form-control(data-provide="datepicker" data-date-format="yyyy-mm-dd")
+    //-         span.input-group-addon
+    //-           span.glyphicon-calendar.glyphicon
+    //-         button.btn.btn-primary Show 
+    div(id="divchart")
+        canvas(id="myChart" width="400" height="200")
+
+    script(src="https://cdn.jsdelivr.net/npm/chart.js")
+    //- script.
+    //-     var ctx = document.getElementById('myChart'); // node
+    //-     var ctx = document.getElementById('myChart').getContext('2d'); // 2d context
+    //-     var ctx = $('#myChart'); // jQuery instance
+    //-     var ctx = 'myChart'; // element id
+    
+    //-     fetch('http://localhost:3000/users/chartjson', {
+    //-         headers : { 
+    //-             'Content-Type': 'application/json',
+    //-             'Accept': 'application/json'
+    //-         }
+    //-     })
+    //-         .then(response => response.json())
+    //-         .then(arr => {
+    //-             let data = [];
+    //-             var myChart = new Chart(ctx, {
+    //-                 type: 'bar',
+    //-                 data: {
+    //-                 labels: ["00",  "01", "02", "03", "04", "05",  "06", "07", "08", "09", "10",  "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"],
+    //-             datasets: [
+    //-             {
+    //-                 label: "users",
+    //-                 backgroundColor: "#c45850",
+    //-                 data:arr,
+    //-             }
+    //-             ]
+    //-             },
+    //-             options: {
+    //-                 legend: { display: false },
+    //-                 title: {
+    //-                 display: true,
+    //-                 text: 'Predicted world population (millions) in 2050'
+    //-             }
+    //-             }
+    //-     });});
+
+    //- script(src="https://code.jquery.com/jquery-1.12.4.js")
+    script(type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js")
+    script(src="https://cdn.datatables.net/plug-ins/1.10.15/api/row().show().js")
