@@ -4,7 +4,7 @@ block content
 
   a.btn.btn-success.col-1.my-3(href="/users/new") Add   
 
-  table(id="example" class="display" width="100%")
+  table(id="users_table" class="display" width="100%")
     thead
       tr 
         th.text-center Name 
@@ -12,24 +12,24 @@ block content
         th.text-center User Id
         th.text-center Date created 
         th.text-center Actions
-
   
-  
-  div.row
-    div.col-md-12
-      div.form-group
-        div.input-group.date(id="datepicker")
-          input.datapicker(data-provide="datepicker" data-date-format="yyyy-mm-dd")
-          //- input.form-control(type="text")
-          span.input-group-addon
-            span.glyphicon-calendar.glyphicon
+  //- div.row.my-3
+  //-   div.col-md-12
+  form.d-flex.justify-content-center(action="/users/chart" method="POST") 
 
-  canvas(id="myChart" width="400" height="200")
+    //-       div.form-group
+    //-         div.input-group.date(id="datepicker")
+    //-           input.datapicker.form-control(data-provide="datepicker" data-date-format="yyyy-mm-dd")
+    //-           span.input-group-addon
+    //-             span.glyphicon-calendar.glyphicon
+    button.btn.btn-primary Stat 
+
+  //- canvas(id="myChart" width="400" height="200")
 
   script(src="https://cdn.jsdelivr.net/npm/chart.js")
   script.
     var ctx = document.getElementById('myChart'); // node
-    var ctx = document.getElementById('myChart').getContext('2d'); // 2d context
+    //var ctx = document.getElementById('myChart').getContext('2d'); // 2d context
     var ctx = $('#myChart'); // jQuery instance
     var ctx = 'myChart'; // element id
     
@@ -63,7 +63,7 @@ block content
         }
     });});
 
-  script(src="https://code.jquery.com/jquery-1.12.4.js")
+  //- script(src="https://code.jquery.com/jquery-1.12.4.js")
   script(type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js")
   script(src="https://cdn.datatables.net/plug-ins/1.10.15/api/row().show().js")
     

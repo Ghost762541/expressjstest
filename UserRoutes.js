@@ -24,16 +24,22 @@ UserRoute.get('/a', async (req, res) => {
   res.json({data: users});
 });
 
-UserRoute.get('/chart', async (req, res) => {
-    let data_chart = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    let current_date = '2021-12-09';
-    let current_date_time = '2021-12-09 01:59:45';
-    let users = await User.find( { date_created : { $regex : current_date } } )
-    for (let i=0; i < users.length; i++) {
-      data_chart[Number(users[i].date_created.slice(11, 13))] ++;
-    }
-    res.json(data_chart);
-  });
+UserRoute.get('/chartjson/:date', async (req, res) => {
+  let data_chart = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  let current_date = '2021-12-09';
+  current_date = req.params.date;
+  console.log(req);
+  let current_date_time = '2021-12-09 01:59:45';
+  let users = await User.find( { date_created : { $regex : current_date } } )
+  for (let i=0; i < users.length; i++) {
+    data_chart[Number(users[i].date_created.slice(11, 13))] ++;
+  }
+  res.json(data_chart);
+});
+
+UserRoute.post('/chart', async (req,res) => {
+  res.render('users/chart');
+})
 
 UserRoute.get('/new', (req, res) => {
     res.render('users/new')
