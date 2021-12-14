@@ -3,10 +3,25 @@ extends ../header.pug
 block content
   p.h5.text-center.my-2=account.titleAccount
   a.btn.btn-success.col-1.my-3(href="/accounts/" + accountId + "/new") Add
-  div.container.list-group.mx-3
-    each user in users 
-      div.row
-        p.list-group-item.col-10.my-2= user.titleUser
-        p.list-group-item.col-10.my-2=user.accountId
-        p.list-group-item.col-10.my-2= user.date_created
-        a.btn.btn-danger.col-1.mx-5.my-2(href="/accounts/" + accountId + "/delete/" + user._id) Delete
+
+  table(id="accounts_users_table" class="display" width="100%")
+    thead
+      tr 
+        th.text-center Name 
+        th.text-center Mail 
+        th.text-center Phone
+        th.text-center Account Id 
+        th.text-center User Id
+        th.text-center Date created 
+        th.text-center Actions
+
+  //- div.container.list-group.mx-3
+  //-   each user in users 
+  //-     div.row
+  //-       p.list-group-item.col-10.my-2= user.titleUser
+  //-       p.list-group-item.col-10.my-2=user.accountId
+  //-       p.list-group-item.col-10.my-2= user.date_created
+  //-       a.btn.btn-danger.col-1.mx-5.my-2(href="/accounts/" + accountId + "/delete/" + user._id) Delete
+
+  script(type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js")
+  script(src="https://cdn.datatables.net/plug-ins/1.10.15/api/row().show().js")

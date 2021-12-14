@@ -11,25 +11,14 @@ html
 
     script.
       function show_chart(){
-        //alert(document.getElementById('date').value)
         let url = 'http://localhost:3000/users/chartjson/' + document.getElementById('date').value + "";
-        // alert(url)
-        //var canvas = document.getElementById("myChart");
-        //- var ctx = canvas.getContext("2d");
-        //- ctx.clearRect(0, 0, 400, 200);
-        // $('#myChart').remove()
 
         $.get( url,  // url
           function (data, textStatus, jqXHR) {  // success callback
-            //- var ctx = document.getElementById('myChart'); // node
-            //- var ctx = document.getElementById('myChart').getContext('2d'); // 2d context
-            //- var ctx = $('#myChart'); // jQuery instance
-            //- var ctx = 'myChart'; // element id
             var pieChartContent = document.getElementById('divchart');
             pieChartContent.innerHTML = '&nbsp;';
             $('#divchart').append('<canvas id="myChart" width="400" height="200"><canvas>');
 
-            //alert('status: ' + textStatus + ', data:' + data);
             var myChart = new Chart('myChart', {
               type: 'bar',
               data: {
@@ -52,9 +41,6 @@ html
             });
           }
         )
-          //alert("5")
-          //document.location.href = "http://localhost:3000/users/chart";
-
           return false
       }
 
@@ -80,27 +66,34 @@ html
           console.log( 5 );
         });
       });
-      
-      //- var jsDate = $('#your_datepicker_id').datepicker('getDate');
-      //- if (jsDate !== null) { // if any date selected in datepicker
-      //-     jsDate instanceof Date; // -> true
-      //-     jsDate.getDate();
-      //-     jsDate.getMonth();
-      //-     jsDate.getFullYear();
-      //- }
 
-      //- $('.datepicker').datepicker({
-      //-   format: 'yyyy-mm-dd',
-      //-   startDate: 'd',
-      //-   onSelect: function(){
-      //-     let fullDate = 5;
-      //-     //var fullDate = $.datepicker.formatDate("yy-mm-dd", $(this).datepicker('getDate'))
-      //-     var str_output = "<h1>" + fullDate +"</h1>"
-      //-     console.log(fullDate)
-      //-     $('#page_output').html(str_output)
-      //-   }
-      //- });
-
+      $(document).ready(function() {
+        $('#accounts_users_table').DataTable( {
+          "processing": true,
+          "serverSide": 0,
+          "ajax": "http://localhost:3000/accounts/" + #{accountId} + "/users/json",
+          aoColumns: [
+            { mData: 'titleUser' },
+            { mData: 'mail'},
+            { mData: 'phone'},
+            { mData: 'accountId' },
+            { mData: 'userId' },
+            { mData: 'date_created' },
+            //{ mData: 'password'},
+            { mData: '_id' , render : function ( data, type, row, meta ) {
+                //return '<a class="btn btn-danger" href="users/delete/' + data + '">Delete</a><a class="btn btn-warning mx-2" href="users/password/' + data + '">Password</a>'
+                return '<a class="btn btn-danger" href="users/delete/' + data + '">Delete</a>' + 
+                '<a class="btn btn-warning mx-2" href="password/' + data + '">Password</a>'
+            }}
+          ]
+        });
+        $('#datepicker').datepicker({
+          format: 'yyyy-mm-dd'
+        });
+        $( "#chart_button" ).on( "click", "tr", function() {
+          console.log( 5 );
+        });
+      });
   body.container
     block head 
       nav.navbar.navbar-expand-lg.navbar-light.bg-light.text-center.mx-auto.navbar-brand="header"

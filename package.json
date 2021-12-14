@@ -21,8 +21,10 @@
     "datatables.net-dt": "^1.11.3",
     "express": "^4.17.1",
     "jquery": "^3.6.0",
+    "md5": "^2.3.0",
     "moment": "^2.29.1",
     "mongoose": "^6.0.14",
+    "nanoid": "^3.1.30",
     "pug": "^3.0.2"
   }
 }
