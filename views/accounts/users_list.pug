@@ -1,8 +1,30 @@
 extends ../header.pug
 
 block content
+
   p.h5.text-center.my-2=account.titleAccount
   a.btn.btn-success.col-1.my-3(href="/accounts/" + accountId + "/new") Add
+  
+  script.
+    $(document).ready(function() {
+      $('#accounts_users_table').DataTable( {
+          "processing": true,
+          "serverSide": 0,
+          "ajax": "http://localhost:3000/accounts/" + #{accountId} + "/users/json",
+          aoColumns: [
+            { mData: 'titleUser' },
+            { mData: 'mail'},
+            { mData: 'phone'},
+            { mData: 'accountId' },
+            { mData: 'userId' },
+            { mData: 'date_created' },
+            { mData: '_id' , render : function ( data, type, row, meta ) {
+                return '<a class="btn btn-danger" href="users/delete/' + data + '">Delete</a>' + 
+                       '<a class="btn btn-warning mx-2" href="password/' + data + '">Password</a>'
+            }}
+          ]
+        });
+    })
 
   table(id="accounts_users_table" class="display" width="100%")
     thead
@@ -14,14 +36,6 @@ block content
         th.text-center User Id
         th.text-center Date created 
         th.text-center Actions
-
-  //- div.container.list-group.mx-3
-  //-   each user in users 
-  //-     div.row
-  //-       p.list-group-item.col-10.my-2= user.titleUser
-  //-       p.list-group-item.col-10.my-2=user.accountId
-  //-       p.list-group-item.col-10.my-2= user.date_created
-  //-       a.btn.btn-danger.col-1.mx-5.my-2(href="/accounts/" + accountId + "/delete/" + user._id) Delete
 
   script(type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js")
   script(src="https://cdn.datatables.net/plug-ins/1.10.15/api/row().show().js")

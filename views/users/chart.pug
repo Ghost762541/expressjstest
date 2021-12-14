@@ -1,10 +1,49 @@
 extends ../header.pug
 
 block content
+
+    script.
+      function show_chart(){
+        let url = 'http://localhost:3000/users/chartjson/' + document.getElementById('date').value + "";
+
+        $.get( url, 
+          function (data, textStatus, jqXHR) { 
+            var pieChartContent = document.getElementById('divchart');
+            pieChartContent.innerHTML = '&nbsp;';
+            $('#divchart').append('<canvas id="myChart" width="400" height="200"><canvas>');
+
+            var myChart = new Chart('myChart', {
+              type: 'bar',
+              data: {
+                labels: ["00",  "01", "02", "03", "04", "05",  "06", "07", "08", "09", "10",  "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"],
+                datasets: [
+                {
+                  label: "users",
+                  backgroundColor: "#c45850",
+                  data:data,
+                }
+                ]
+              },
+              options: {
+                legend: { display: false },
+                title: {
+                  display: true,
+                  text: 'Predicted world population (millions) in 2050'
+                }
+              }
+            });
+          }
+        )
+          return false
+      }
+
     input.datapicker(data-provide="datepicker-inline" data-date-format="yyyy-mm-dd" name="date" id="date")
     button(onclick="show_chart()") Show
+
+    
     div(id="divchart")
         canvas(id="myChart" width="400" height="200")
+        
     script(src="https://cdn.jsdelivr.net/npm/chart.js")
     script(type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js")
     script(src="https://cdn.datatables.net/plug-ins/1.10.15/api/row().show().js")

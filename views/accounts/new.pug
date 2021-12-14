@@ -1,9 +1,12 @@
 extends ../header.pug
 
 block content
+
   form.d-flex.justify-content-center(action="/accounts/new" method="POST") 
     div.row
+    
       div.col-8
         input.form-control.mt-3(type="text" name="titleAccount")
+
       div.col-4
         button.btn.btn-primary.mt-3 submit

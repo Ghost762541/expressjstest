@@ -12,7 +12,6 @@ AccountRoute.use(function timeLog(req, res, next) {
 
 AccountRoute.get('/', async (req, res) => {
   const accounts = await Account.find();
-  //console.log(accounts)
   res.render('accounts/accounts', {
     accounts
   })
@@ -24,8 +23,10 @@ AccountRoute.get('/new', (req, res) => {
 
 AccountRoute.post('/new', async (req, res) => {
   let c = await Account.count({}) + 1;
-  console.log('count', c);
-  const newAccount = new Account({titleAccount: req.body.titleAccount, accountId: c});
+  const newAccount = new Account({
+    titleAccount: req.body.titleAccount, 
+    accountId: c
+  });
   await newAccount.save();
   res.redirect('/accounts');
 })
@@ -37,25 +38,15 @@ AccountRoute.get('/delete/:_id', async (req, res) => {
 
 AccountRoute.get('/:id/users', async (req, res) => {
   let accountId = req.params.id;
-  //const newAccount = new Account({titleAccount: req.body.titleAccount, accountId: c});
   let account = await Account.findOne({ accountId: req.params.id });
-  //let account_name = account[0].titleAccount;
-  const users = await User.find({ accountId: req.params.id });
-  console.log(users);
   res.render('accounts/users_list', {
-    users,
     accountId,
     account
   })
 });
 
 AccountRoute.get('/:id/users/json', async (req, res) => {
-  let accountId = JSON.parse(req.params.id);
-  //const newAccount = new Account({titleAccount: req.body.titleAccount, accountId: c});
-  let account = await Account.findOne({ accountId: req.params.id });
-  //let account_name = account[0].titleAccount;
   const users = await User.find({ accountId: req.params.id });
-  //console.log(users);
   res.json(  { data: users })
 });
 
@@ -70,10 +61,15 @@ AccountRoute.post('/:accountId/new', async (req, res) => {
   let userId = await User.count({}) + 1;
   let accountId = req.params.accountId;
   let date_created = moment();
-  //console.log('create new user:', {accountId, userId, date_created: date_created.format('YYYY-MM-DD hh:mm:ss')});
-  const newUser = new User({titleUser: req.body.titleUser, accountId, userId, date_created: date_created.format('YYYY-MM-DD HH:mm:ss'), mail: req.body.mail, phone: req.body.phone});
+  const newUser = new User({
+    titleUser: req.body.titleUser, 
+    accountId, 
+    userId, 
+    date_created: date_created.format('YYYY-MM-DD HH:mm:ss'), 
+    mail: req.body.mail, 
+    phone: req.body.phone,
+  });
   await newUser.save();
-  //res.json({})
   res.redirect('/accounts/' + accountId + '/users');
 })
 
@@ -85,11 +81,10 @@ AccountRoute.get('/:accountId/delete/:_id', async (req, res) => {
 
 AccountRoute.get('/:accountId/password/:_id', async (req, res) => {
   let accountId = req.params.accountId;
-  //let user = await User.findOne({_id: req.params._id}.exec());
-  let password = md5(nanoid());
+  let password = nanoid();
   console.log(password);
-  //let user = await User.findOne({_id: req.params._id}.exec());
-  await User.updateOne({_id: req.params._id} , { $set: { passwordHash: password } }).exec();
+  let passwordHash = md5(password);
+  await User.updateOne({_id: req.params._id} , { $set: { passwordHash: passwordHash } }).exec();
   res.redirect('/accounts/' + accountId + '/users');
 })
 

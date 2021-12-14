@@ -42,7 +42,12 @@ UserRoute.get('/new', (req, res) => {
 UserRoute.post('/new', async (req, res) => {
     let c = await User.count({}) + 1;
     let date_created = moment();
-    const newuser = new User({titleUser: req.body.titleUser, accountId: req.body.Id, userId: c, date_created: date_created.format('YYYY-MM-DD HH:mm:ss')});
+    const newuser = new User({
+      titleUser: req.body.titleUser, 
+      accountId: req.body.Id, 
+      userId: c, 
+      date_created: date_created.format('YYYY-MM-DD HH:mm:ss')
+    });
     await newuser.save();
     res.redirect('/users');
 })
