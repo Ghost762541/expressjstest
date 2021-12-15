@@ -36,9 +36,9 @@ block content
         )
           return false
       }
-
-    input.datapicker(data-provide="datepicker-inline" data-date-format="yyyy-mm-dd" name="date" id="date")
-    button(onclick="show_chart()") Show
+    div.text-center
+      input.datapicker.form-control.my-2(data-provide="datepicker-inline" data-date-format="yyyy-mm-dd" name="date" id="date")
+      button.btn.btn-primary.my-2(onclick="show_chart()") Show
 
     
     div(id="divchart")

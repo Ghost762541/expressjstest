@@ -1,8 +1,10 @@
 extends ../header.pug
 
 block content
-
+  
   a.btn.btn-success.col-1.my-3(href="/users/new") Add   
+  form(action="/users/chart" method="POST")
+    button.btn.btn-primary Stat
 
   script.
       $(document).ready(function() {
@@ -16,7 +18,9 @@ block content
             { mData: 'userId' },
             { mData: 'date_created' },
             { mData: '_id' , render : function ( data, type, row, meta ) {
-                return '<a class="btn btn-danger" href="users/delete/' + data + '">Delete</a>'      
+                return '<div class="col text-center">'+
+                        '<a class="btn btn-danger" href="users/delete/' + data + '">Delete</a>' +
+                        '</div>'      
             }}
           ]
         });
@@ -37,8 +41,7 @@ block content
         th.text-center Date created 
         th.text-center Actions
   
-  form.d-flex.justify-content-center(action="/users/chart" method="POST")
-    button.btn.btn-primary Stat
+  
 
   script(type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js")
   script(src="https://cdn.datatables.net/plug-ins/1.10.15/api/row().show().js")
