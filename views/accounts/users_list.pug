@@ -20,7 +20,8 @@ block content
             { mData: 'date_created' },
             { mData: '_id' , render : function ( data, type, row, meta ) {
                 return '<a class="btn btn-danger" href="users/delete/' + data + '">Delete</a>' + 
-                       '<a class="btn btn-warning mx-2" href="password/' + data + '">Password</a>'
+                       '<a class="btn btn-warning mx-2" href="password/' + data + '">Password</a>' +
+                       '<a class="btn btn-warning" href="profile/' + data + '/">Profile</a>'
             }}
           ]
         });

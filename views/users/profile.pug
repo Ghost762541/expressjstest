@@ -1,0 +1,12 @@
+extends ../header.pug
+
+block content
+
+  div.card.my-5(style="width: 36rem;")
+    div.card
+      p.h5.text-center.my-2 User
+      div.card-body 
+        img.card-img(src = "/accounts/" + imgpath)
+        a.btn.btn-primary.my-3(href="upload/") Upload
+        p.card-text= mail
+        p.card-text= phone
