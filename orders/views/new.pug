@@ -1,0 +1,11 @@
+extends header.pug
+
+block content
+
+  form.d-flex.justify-content-center(action="/login/user/" + userId + "/new" method="POST")
+    div.row
+      input.form-control.mt-3(type="text" name="title" placeholder="title" )
+      input.form-control.mt-3(type="text" name="price" placeholder="price")
+      input.form-control.mt-3(type="text" name="userId" value=userId readonly)
+      input.form-control.mt-3(type="text" name="accountId" value=accountId readonly)
+      button.btn.btn-primary.mt-3 submit

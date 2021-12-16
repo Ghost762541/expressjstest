@@ -3,7 +3,7 @@ const loginRoute = express.Router();
 const mongoose = require('mongoose');
 const sessions = require('express-session');
 const cookieParser = require("cookie-parser");
-const { User } = require('../model');
+const { User, Order } = require('../model');
 const md5 = require('md5');
 //const { User, Account } = require('../model.js');
 
@@ -42,15 +42,44 @@ loginRoute.post('/', async (req, res) => {
         session=req.session;
         session.userid=req.body.email;
         console.log(req.session)
-        res.redirect('/login/user/' + req.body.email + "")
+        let id = user.userId
+        res.redirect('/login/user/' + id + "")
     }
     else{
         res.send('Invalid username or password');
     }
 });
 
-loginRoute.get('/user/:id', (req, res) => {
-    res.render('user')
+loginRoute.get('/user/:id', async (req, res) => {
+    let id = req.params.id
+    const orders = await Order.find({});
+    console.log(orders)
+    res.render('user', { id })
+})
+
+loginRoute.get('/user/:id/new', async (req, res) => {
+    console.log(req.params.id)
+    let user = await User.findOne({ userId: req.params.id }).exec();
+    console.log(user)
+    let userId = user.userId;
+    let accountId = user.accountId;
+    res.render('new', {
+        userId,
+        accountId
+    })
+})
+
+loginRoute.post('/user/:id/new', async (req,res) => {
+    const newOrder = new Order({
+        title: req.body.title, 
+        price: req.body.price, 
+        userId: req.body.userId, 
+        accountId: req.body.accountId,
+    });
+    await newOrder.save();
+    console.log(newOrder)
+    let userId = req.params.id;
+    res.redirect('/login/user/' + userId + '')
 })
 
 loginRoute.get('/logout', (req, res) => {

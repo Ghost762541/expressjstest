@@ -12,10 +12,19 @@ const Userschema = new mongoose.Schema({
     imgpath: 'string'
 });
 const User = mongoose.model('User', Userschema);
+
 const Accountschema = new mongoose.Schema({
     titleAccount: 'string', 
     accountId: 'number'
 });
 const Account = mongoose.model('Account', Accountschema);
 
-module.exports = { User, Account };
+const OrderSchema = new mongoose.Schema({
+    title: 'string',
+    price: 'string',
+    userId: 'number',
+    accountId: 'number'
+})
+const Order = mongoose.model('Order', OrderSchema);
+
+module.exports = { User, Account, Order };
