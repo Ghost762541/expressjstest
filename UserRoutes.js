@@ -52,8 +52,8 @@ UserRoute.post('/new', async (req, res) => {
     res.redirect('/users');
 })
 
-UserRoute.get('/delete/:_id', async (req, res) => {
-    User.find({_id: req.params._id}).remove().exec();
+UserRoute.get('/delete/:id', async (req, res) => {
+    User.find({userId: req.params.id}).remove().exec();
     res.redirect('/users');
 })
 

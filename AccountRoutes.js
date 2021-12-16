@@ -11,17 +11,10 @@ const bodyParser = require('body-parser');
 
 const uploadPath = '/home/user/tmp/files/';
 
-//app.use(express.static(__dirname + '/users/upload.pug'));
 AccountRoute.use(express.static(uploadPath));
 
-// support parsing of application/json type post data
-app.use(bodyParser.json());
-
-//support parsing of application/x-www-form-urlencoded post data
-app.use(bodyParser.urlencoded({ extended: true }));
-
 AccountRoute.use(function timeLog(req, res, next) {
-    next();
+  next();
 });
 
 AccountRoute.use(fileUpload());
@@ -47,8 +40,8 @@ AccountRoute.post('/new', async (req, res) => {
   res.redirect('/accounts');
 })
 
-AccountRoute.get('/delete/:_id', async (req, res) => {
-  Account.find({_id: req.params._id}).remove().exec();
+AccountRoute.get('/delete/:id', async (req, res) => {
+  Account.deleteOne({accountId: req.params.id}).exec();
   res.redirect('/accounts');
 })
 
@@ -89,52 +82,39 @@ AccountRoute.post('/:accountId/new', async (req, res) => {
   res.redirect('/accounts/' + accountId + '/users');
 })
 
-AccountRoute.get('/:accountId/delete/:_id', async (req, res) => {
+AccountRoute.get('/:accountId/delete/:id', async (req, res) => {
   let accountId = req.params.accountId;
-  await User.find({_id: req.params._id}).remove().exec();
+  await User.find({userId: req.params.id}).remove().exec();
   res.redirect('/accounts/' + accountId + '/users');
 })
 
-AccountRoute.get('/:accountId/password/:_id', async (req, res) => {
+AccountRoute.get('/:accountId/password/:id', async (req, res) => {
   let accountId = req.params.accountId;
   let password = nanoid();
   console.log(password);
   let passwordHash = md5(password);
-  await User.updateOne({_id: req.params._id} , { $set: { passwordHash: passwordHash } }).exec();
+  await User.updateOne({userId: req.params.id} , { $set: { passwordHash: passwordHash } }).exec();
   res.redirect('/accounts/' + accountId + '/users');
 })
 
-AccountRoute.get('/:accountId/profile/:_id/', async (req, res) => {
-  let user = await User.findOne({_id: req.params._id})
-  //console.log(user)
-  //let accountId = req.params.accountId;
-  //res.redirect('/accounts/' + accountId + '/users');
+AccountRoute.get('/:accountId/profile/:userId/', async (req, res) => {
+  let user = await User.findOne({userId: req.params.userId})
   res.render('users/profile', user);
 })
 
-AccountRoute.get('/:accountId/profile/:_id/upload', async (req, res) => {
-  //res.redirect('/accounts/' + accountId + '/users');
+AccountRoute.get('/:accountId/profile/:userId/upload', async (req, res) => {
   let accountId = req.params.accountId;
-  let userId = req.params._id;
+  let userId = req.params.userId;
   res.render('users/upload', {accountId, userId}) ;
 })
 
-AccountRoute.post('/:accountId/profile/:_id/upload', async (req, res) => {
+AccountRoute.post('/:accountId/profile/:userId/upload', async (req, res) => {
   let accountId = req.params.accountId;
-  let userId = req.params._id;
-  //let accountId = req.params.accountId;
-  //res.redirect('/accounts/' + accountId + '/users');
-  // if (!req.files || Object.keys(req.files).length === 0) {
-  //   return res.status(400).send('No files were uploaded.');
-  // }
+  let userId = req.params.userId;
   await console.log(req.files);
   let imgpath = req.params._id + ".png";
   req.files.img.mv(uploadPath + imgpath )
-  
-  await User.updateOne({_id: req.params._id}, { $set: { imgpath: imgpath } }).exec();
-  
-  //res.json(imgpath);
-  //console.log(_dirname);
+  await User.updateOne({userId: req.params.userId}, { $set: { imgpath: imgpath } }).exec();
   res.redirect('/accounts/' + accountId + '/profile/' + userId + '/')
 })
 

@@ -2,7 +2,7 @@ extends ../header.pug
 
 block content
 
-  p.h5.text-center.my-2=account.titleAccount
+  p.h5.text-center.my-2= titleAccount
   a.btn.btn-success.col-1.my-3(href="/accounts/" + accountId + "/new") Add
   
   script.
@@ -18,9 +18,9 @@ block content
             { mData: 'accountId' },
             { mData: 'userId' },
             { mData: 'date_created' },
-            { mData: '_id' , render : function ( data, type, row, meta ) {
+            { mData: 'userId' , render : function ( data, type, row, meta ) {
                 return '<div class="col text-center">'+
-                      '<a class="btn btn-danger" href="users/delete/' + data + '">Delete</a>' + 
+                      '<a class="btn btn-danger" href="delete/' + data + '">Delete</a>' + 
                        '<a class="btn btn-warning mx-2" href="password/' + data + '">Password</a>' +
                        '<a class="btn btn-warning" href="profile/' + data + '/">Profile</a>'+
                        '</div>'
