@@ -40,8 +40,8 @@ AccountRoute.post('/new', async (req, res) => {
   res.redirect('/accounts');
 })
 
-AccountRoute.get('/delete/:id', async (req, res) => {
-  Account.deleteOne({accountId: req.params.id}).exec();
+AccountRoute.get('/delete/:accountId', async (req, res) => {
+  Account.deleteOne({accountId: req.params.accountId}).exec();
   res.redirect('/accounts');
 })
 
@@ -93,6 +93,7 @@ AccountRoute.get('/:accountId/password/:id', async (req, res) => {
   let password = nanoid();
   console.log(password);
   let passwordHash = md5(password);
+  console.log(passwordHash);
   await User.updateOne({userId: req.params.id} , { $set: { passwordHash: passwordHash } }).exec();
   res.redirect('/accounts/' + accountId + '/users');
 })
