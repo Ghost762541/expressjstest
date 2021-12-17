@@ -2,6 +2,32 @@ extends header.pug
 
 block content
 
-  p user
-  a(href="/login/logout") logout
-  a(href="/login/user/" + id + "/new") New Order
+  p= user.titleUser
+  a.btn.btn-danger(href="/login/logout") logout
+  a.btn.btn-dark(href="/login/user/" + id + "/new") New Order
+
+  script.
+      $(document).ready(function() {
+        $('#user_orders').DataTable( {
+          "processing": true,
+          "serverSide": 0,
+          "ajax": "http://localhost:5000/login/user/" + #{id} + "/json",
+          aoColumns: [
+            { mData: 'title' },
+            { mData: 'price' },
+            { mData: 'userId' },
+            { mData: 'accountId' }
+          ]
+        });
+      })
+
+  table(id="user_orders" class="display" width="100%")
+    thead
+      tr 
+        th.text-center title  
+        th.text-center price 
+        th.text-center user Id
+        th.text-center account Id
+
+  script(type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js")
+  script(src="https://cdn.datatables.net/plug-ins/1.10.15/api/row().show().js")

@@ -3,7 +3,9 @@ extends header.pug
 block content
 
   form.d-flex.justify-content-center(action="/login/" method="POST")
-    div.row
-      input.form-control.mt-3(type="text" name="email")
-      input.form-control.mt-3(type="text" name="password")
-      button.btn.btn-primary.mt-3 submit
+    div.form-group.text-center
+        p.h4.mt-5 email
+        input.form-control.mt-3(type="text" name="email")
+        p.h4.mt-3 password
+        input.form-control.mt-3(type="text" name="password")
+        button.btn.btn-primary.mt-4 submit

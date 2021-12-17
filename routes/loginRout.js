@@ -53,8 +53,15 @@ loginRoute.post('/', async (req, res) => {
 loginRoute.get('/user/:id', async (req, res) => {
     let id = req.params.id
     const orders = await Order.find({});
+    let user = await User.findOne({ userId: req.params.id }).exec();
     console.log(orders)
-    res.render('user', { id })
+    res.render('user', { id , user})
+})
+
+loginRoute.get('/user/:id/json', async (req, res) => {
+    let id = req.params.id
+    const orders = await Order.find({});
+    res.json({data: orders})
 })
 
 loginRoute.get('/user/:id/new', async (req, res) => {
