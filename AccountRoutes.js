@@ -21,6 +21,8 @@ AccountRoute.use(fileUpload());
 
 AccountRoute.get('/', async (req, res) => {
   const accounts = await Account.find();
+  //await Account.find({}).remove().exec()
+  console.log(accounts)
   res.render('accounts/accounts', {
     accounts
   })
@@ -47,10 +49,12 @@ AccountRoute.get('/delete/:accountId', async (req, res) => {
 
 AccountRoute.get('/:id/users', async (req, res) => {
   let accountId = req.params.id;
-  let account = await Account.findOne({ accountId: req.params.id });
+  let account = await Account.findOne({ accountId: req.params.id }).exec();
+  console.log(account)
+  let titleAccount = account.titleAccount
   res.render('accounts/users_list', {
     accountId,
-    account
+    titleAccount
   })
 });
 

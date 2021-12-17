@@ -81,6 +81,7 @@ loginRoute.post('/user/:id/new', async (req,res) => {
         title: req.body.title, 
         price: req.body.price, 
         userId: req.body.userId, 
+        user: req.params.id,
         accountId: req.body.accountId,
     });
     await newOrder.save();

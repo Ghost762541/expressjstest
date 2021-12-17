@@ -23,6 +23,7 @@ const OrderSchema = new mongoose.Schema({
     title: 'string',
     price: 'string',
     userId: 'number',
+    user: { type: Number, ref: 'User' },
     accountId: 'number'
 })
 const Order = mongoose.model('Order', OrderSchema);

@@ -1,67 +1,107 @@
 extends ../header.pug
 
 block content
-
-  p.h5.text-center.my-2= titleAccount
-  a.btn.btn-success.col-1.my-3(href="/accounts/" + accountId + "/new") Add
+  p.h4.text-center.mt-5= titleAccount
   
-  script.
-    $(document).ready(function() {
-      $('#accounts_users_table').DataTable( {
-          "processing": true,
-          "serverSide": 0,
-          "ajax": "http://localhost:3000/accounts/" + #{accountId} + "/users/json",
-          aoColumns: [
-            { mData: 'titleUser' },
-            { mData: 'mail'},
-            { mData: 'phone'},
-            { mData: 'accountId' },
-            { mData: 'userId' },
-            { mData: 'date_created' },
-            { mData: 'userId' , render : function ( data, type, row, meta ) {
-                return '<div class="col text-center">'+
-                      '<a class="btn btn-danger" href="delete/' + data + '">Delete</a>' + 
-                       '<a class="btn btn-warning mx-2" href="password/' + data + '">Password</a>' +
-                       '<a class="btn btn-warning" href="profile/' + data + '/">Profile</a>'+
-                       '</div>'
-            }}
-          ]
-        });
-    })
+  //- ul.nav.nav-tabs.my-3
+  //-   li.nav-item
+  //-     a.nav-link.active(aria-current="page" href="#") Users
+  //-   li.nav-item
+  //-     a.nav-link(href="#") Orders
 
-  table(id="accounts_users_table" class="display" width="100%")
-    thead
-      tr 
-        th.text-center Name 
-        th.text-center Mail 
-        th.text-center Phone
-        th.text-center Account Id 
-        th.text-center User Id
-        th.text-center Date created 
-        th.text-center Actions
+  //- ul.nav.nav-tabs(id="myTab" role="tablist")
+  //-   li.nav-item(role="presentation")
+  //-     button.nav-link.active(id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true") Users
+  //-   li.nav-item(role="presentation")
+  //-     button.nav-link(id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false") Orders
+  
+  //- div.tab-content(id="myTabContent")
+  //-   div.tab-pane.fade.show.active(id="home" role="tabpanel" aria-labelledby="home-tab")
+  //-     p 1
+  //-   div.tab-pane.fade(id="profile" role="tabpanel" aria-labelledby="profile-tab")
+  //-     p 2
 
-  script.
-    $(document).ready(function() {
-      $('#account_orders').DataTable( {
-        "processing": true,
-        "serverSide": 0,
-        "ajax": "http://localhost:3000/accounts/" + #{accountId} + "/users/orders/json",
-        aoColumns: [
-          { mData: 'title' },
-          { mData: 'price' },
-          { mData: 'userId' },
-          { mData: 'accountId' }
-        ]
-      });
-    })
+  //- ul.nav.nav-tabs(id="myTab" role="tablist")
+  //-   li.nav-item(role="presentation")
+  //-     button.nav-link.active(id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true") Users
+  //-   li.nav-item(role="presentation")
+  //-     button.nav-link(id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false") Orders
+  
+  //- div.tab-content(id="myTabContent")
+  //-   div.tab-pane.fade.show.active(id="home" role="tabpanel" aria-labelledby="home-tab")
+  //-     p 1
+  //-   div.tab-pane.fade(id="profile" role="tabpanel" aria-labelledby="profile-tab")
+  //-     p 2
 
-  table(id="account_orders" class="display" width="100%")
-    thead
-      tr 
-        th.text-center title  
-        th.text-center price 
-        th.text-center user Id
-        th.text-center account Id
+  ul.nav.nav-tabs
+    li.nav-item
+      a.nav-link.active(href="#1" data-toggle="tab") Users
+    li.nav-item
+      a.nav-link.text-dark(href="#2" data-toggle="tab") Orders
+
+  div.tab-content
+    div.tab-pane.active(id="1")
+
+      a.btn.btn-dark.col-1.my-4(href="/accounts/" + accountId + "/new") Add
+      
+      script.
+        $(document).ready(function() {
+          $('#accounts_users_table').DataTable( {
+              "processing": true,
+              "serverSide": 0,
+              "ajax": "http://localhost:3000/accounts/" + #{accountId} + "/users/json",
+              aoColumns: [
+                { mData: 'titleUser' },
+                { mData: 'mail'},
+                { mData: 'phone'},
+                { mData: 'userId' },
+                { mData: 'date_created' },
+                { mData: 'userId' , render : function ( data, type, row, meta ) {
+                    return '<div class="col text-center">'+
+                          '<a class="btn btn-dark" href="delete/' + data + '">Delete</a>' + 
+                          '<a class="btn btn-dark mx-2" href="password/' + data + '">Password</a>' +
+                          '<a class="btn btn-dark" href="profile/' + data + '/">Profile</a>'+
+                          '</div>'
+                }}
+              ]
+            });
+        })
+
+      table(id="accounts_users_table" class="display" width="100%")
+        thead
+          tr 
+            th.text-center Name 
+            th.text-center Mail 
+            th.text-center Phone
+            th.text-center User Id
+            th.text-center Date created 
+            th.text-center Actions
+
+    div.tab-pane(id="2")
+
+      script.
+        $(document).ready(function() {
+          $('#account_orders').DataTable( {
+            "processing": true,
+            "serverSide": 0,
+            "ajax": "http://localhost:3000/accounts/" + #{accountId} + "/users/orders/json",
+            aoColumns: [
+              { mData: 'title' },
+              { mData: 'price' },
+              { mData: 'userId' }
+            ]
+          });
+        })
+
+      div.mt-4
+        table(id="account_orders" class="display" width="100%")
+          thead
+            tr 
+              th.text-center title  
+              th.text-center price 
+              th.text-center user Id
+
+  script(src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js")
 
   script(type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js")
   script(src="https://cdn.datatables.net/plug-ins/1.10.15/api/row().show().js")

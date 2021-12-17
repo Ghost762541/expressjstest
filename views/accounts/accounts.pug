@@ -2,11 +2,11 @@ extends ../header.pug
 
 block content
 
-  a.btn.btn-success.col-1.my-3(href="/accounts/new") Add
+  a.btn.btn-dark.col-1.my-4(href="/accounts/new") Add
   
-  div.container.list-group.mx-3
+  div.container.list-group.h-100.align-items-center.w-100
     each account in accounts 
-      div.row
-        a.list-group-item.col-10.my-2(href="/accounts/" + account.accountId + "/users")= account.titleAccount
-        a.btn.btn-danger.col-1.mx-5.my-2(href="/accounts/delete/" + account.accountId + "") Delete
-      
+      div.row.w-75.align-items-center
+        div.d-flex.flex-row.shadow.my-3.justify-content-center
+          a.mx-3.my-3.col-11.text-decoration-none.text-reset(href="/accounts/" + account.accountId + "/users")= account.titleAccount
+          a.btn.btn-close.mx-3.my-3.col-1(href="/accounts/delete/" + account.accountId + "") 
