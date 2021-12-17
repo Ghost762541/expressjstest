@@ -1,7 +1,7 @@
 const express = require('express')
 const AccountRoute = express.Router();
 const mongoose = require('mongoose');
-const { User, Account } = require('./model.js');
+const { User, Account, Order } = require('./model.js');
 const moment = require('moment');
 const { nanoid } = require('nanoid');
 const md5 = require('md5');
@@ -118,5 +118,10 @@ AccountRoute.post('/:accountId/profile/:userId/upload', async (req, res) => {
   await User.updateOne({userId: req.params.userId}, { $set: { imgpath: imgpath } }).exec();
   res.redirect('/accounts/' + accountId + '/profile/' + userId + '/')
 })
+
+AccountRoute.get('/:id/users/orders/json', async (req, res) => {
+  const orders = await Order.find({ accountId: req.params.id });
+  res.json(  { data: orders })
+});
 
 module.exports = AccountRoute;
