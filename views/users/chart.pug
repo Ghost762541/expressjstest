@@ -19,7 +19,7 @@ block content
                 datasets: [
                 {
                   label: "users",
-                  backgroundColor: "#c45850",
+                  backgroundColor: "#a9a9a9",
                   data:data,
                 }
                 ]
@@ -36,9 +36,19 @@ block content
         )
           return false
       }
-    div.text-center
-      input.datapicker.form-control.my-2(data-provide="datepicker-inline" data-date-format="yyyy-mm-dd" name="date" id="date")
-      button.btn.btn-primary.my-2(onclick="show_chart()") Show
+    //- div.text-center
+    //-   input.datapicker.form-control.my-2(data-provide="datepicker-inline" data-date-format="yyyy-mm-dd" name="date" id="date")
+    //-   button.btn.btn-primary.my-2(onclick="show_chart()") Show
+
+    div.justify-content-center.my-4.d-flex
+      div.text-center
+        p.h5 Date
+          div.d-flex
+            div.row
+              div.col-9
+                input.datapicker.form-control.my-2(data-provide="datepicker-inline" data-date-format="yyyy-mm-dd" name="date" id="date")
+              div.col-3
+                button.btn.btn-dark.my-2(onclick="show_chart()") Show
 
     
     div(id="divchart")

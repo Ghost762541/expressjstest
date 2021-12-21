@@ -31,7 +31,7 @@ UserRoute.get('/chartjson/:date', async (req, res) => {
   res.json(data_chart);
 });
 
-UserRoute.post('/chart', async (req,res) => {
+UserRoute.get('/chart', async (req,res) => {
   res.render('users/chart');
 })
 
