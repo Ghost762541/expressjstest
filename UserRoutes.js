@@ -49,6 +49,7 @@ UserRoute.post('/new', async (req, res) => {
       date_created: date_created.format('YYYY-MM-DD HH:mm:ss')
     });
     await newuser.save();
+    console.log(newuser)
     res.redirect('/users');
 })
 

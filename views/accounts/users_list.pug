@@ -49,7 +49,7 @@ block content
           $('#accounts_users_table').DataTable( {
               "processing": true,
               "serverSide": 0,
-              "ajax": "http://localhost:3000/accounts/" + #{accountId} + "/users/json",
+              "ajax": "http://localhost:5000/accounts/" + #{accountId} + "/users/json",
               aoColumns: [
                 { mData: 'titleUser' },
                 { mData: 'mail'},
@@ -84,7 +84,7 @@ block content
           $('#account_orders').DataTable( {
             "processing": true,
             "serverSide": 0,
-            "ajax": "http://localhost:3000/accounts/" + #{accountId} + "/users/orders/json",
+            "ajax": "http://localhost:5000/accounts/" + #{accountId} + "/users/orders/json",
             aoColumns: [
               { mData: 'title' },
               { mData: 'price' },

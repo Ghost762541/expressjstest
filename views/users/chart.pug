@@ -4,7 +4,7 @@ block content
 
     script.
       function show_chart(){
-        let url = 'http://localhost:3000/users/chartjson/' + document.getElementById('date').value + "";
+        let url = 'http://localhost:5000/users/chartjson/' + document.getElementById('date').value + "";
 
         $.get( url, 
           function (data, textStatus, jqXHR) { 

@@ -8,8 +8,9 @@ const md5 = require('md5');
 const fileUpload = require('../lib/index');
 const app = express();
 const bodyParser = require('body-parser');
+const config = require('config');
 
-const uploadPath = '/home/user/tmp/files/';
+const uploadPath = config.get('path.uploadPath');
 
 AccountRoute.use(express.static(uploadPath));
 

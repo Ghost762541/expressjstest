@@ -1,0 +1,14 @@
+{
+    "admin-api": {
+      "port": 5000
+    },
+    "orders-api": {
+      "post": 3000
+    },
+   "mongo": {
+      "Mongodb" : "mongodb://192.168.241.84:27017/test"
+    },
+    "path": {
+      "uploadPath" : "/home/user/tmp/files/"
+    }
+}
