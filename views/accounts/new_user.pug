@@ -2,9 +2,17 @@ extends ../header.pug
 
 block content
 
-  form.d-flex.justify-content-center(action="/accounts/" + accountId + "/new" method="POST") 
-    div.row
-      input.form-control.mt-3(type="text" name="titleUser")
-      input.form-control.mt-3(type="text" name="mail")
-      input.form-control.mt-3(type="text" name="phone")
-      button.btn.btn-primary.mt-3 submit
+  //- form.d-flex.justify-content-center(action="/accounts/" + accountId + "/new" method="POST") 
+  //-   div.row
+  //-     input.form-control.mt-3(type="text" name="titleUser")
+  //-     input.form-control.mt-3(type="text" name="mail")
+  //-     input.form-control.mt-3(type="text" name="phone")
+  //-     button.btn.btn-primary.mt-3 submit
+
+  form.d-flex.justify-content-center(action="/accounts/" + accountId + "/new" method="POST")
+    div.form-group.text-center
+        p.h4.mt-5 New user
+        input.form-control.mt-3(type="text" name="titleUser" placeholder="User name")
+        input.form-control.mt-3(type="text" name="mail" placeholder="email")
+        input.form-control.mt-3(type="text" name="phone" placeholder="phone")
+        button.btn.btn-dark.mt-4 submit

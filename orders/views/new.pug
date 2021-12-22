@@ -3,9 +3,27 @@ extends header.pug
 block content
 
   form.d-flex.justify-content-center(action="/login/user/" + userId + "/new" method="POST")
-    div.row
-      input.form-control.mt-3(type="text" name="title" placeholder="title" )
-      input.form-control.mt-3(type="text" name="price" placeholder="price")
-      input.form-control.mt-3(type="text" name="userId" value=userId readonly)
-      input.form-control.mt-3(type="text" name="accountId" value=accountId readonly)
-      button.btn.btn-primary.mt-3 submit
+    div.form-group.text-center.container.row.justify-content-center
+        p.h4.mt-5 New order
+        div.container.row.justify-content-center.w-50
+          div.row.col-12.mt-2
+            div.col-4
+              p.mt-2 Title
+            div.col-8.text-center
+              input.form-control(type="text" name="title" placeholder="title" )
+          div.row.col-12.justify-content-center.mt-2
+            div.col-4
+              p Price
+            div.col-8.text-center
+              input.form-control(type="text" name="price" placeholder="price")
+          div.row.col-12.justify-content-center.mt-2
+            div.col-4
+              p User Id
+            div.col-8.text-center
+              input.form-control(type="text" name="userId" value=userId readonly)
+          div.row.col-12.justify-content-center.mt-2
+            div.col-4
+              p Account Id
+            div.col-8.text-center
+              input.form-control(type="text" name="accountId" value=accountId readonly)
+          button.btn.btn-dark.mt-4.col-2 submit

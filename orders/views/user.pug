@@ -1,10 +1,13 @@
 extends header.pug
 
 block content
+  block content
 
-  p= user.titleUser
-  a.btn.btn-danger(href="/login/logout") logout
-  a.btn.btn-dark(href="/login/user/" + id + "/new") New Order
+  p.h4.text-center.mt-5= user.titleUser 
+
+  div.my-4.d-flex.justify-content-between
+    a.btn.btn-dark(href="/login/user/" + id + "/new") New Order
+    a.btn.btn-dark(href="/login/logout") logout
 
   script.
       $(document).ready(function() {
